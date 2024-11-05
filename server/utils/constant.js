@@ -1,5 +1,6 @@
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
+  SITE_BUILDER: `https://sitebuilder-develop.de.r.appspot.com`,
   NETWORK_NAME: process.env.NETWORK_NAME || "Avalanche Mainnet",
   NETWORK_URL:
     process.env.NETWORK_URL || "https://api.avax.network/ext/bc/C/rpc",

@@ -144,10 +144,10 @@ fundRaisin.getTopFundraiser = async (walletAddress) => {
     { length: constant.MAX_TOP_LIST },
     (_, i) => i + 1
   )) {
-    let nft = await Contract.top(process.env.APP_SITE_ID, i);
+    let nft = await Contract.top(process.env.APP_SITE_ID || 0, i);
     if (nft.campaignTokenIndex.toNumber() > 0) {
       nft = await Contract.nftByCampaign(
-        process.env.APP_SITE_ID,
+        process.env.APP_SITE_ID || 0,
         nft.campaignTokenIndex.toNumber()
       );
       let owner = await Contract.ownerOf(nft.tokenId.toNumber()); // nft.currentOwner;
@@ -178,7 +178,7 @@ fundRaisin.getMyNFTs = async (wallet) => {
   let count = 0;
   if (wallet) {
     nfts = await Contract.getCampaignNfts(
-      process.env.APP_SITE_ID,
+      process.env.APP_SITE_ID || 0,
       constant.MY_NFT_MODE,
       wallet != 0 ? wallet : ethers.constants.AddressZero
     );
@@ -201,7 +201,7 @@ fundRaisin.getMyNFTs = async (wallet) => {
 
 fundRaisin.getBuyNFTs = async (wallet, query) => {
   let nfts = await Contract.getCampaignNfts(
-    process.env.APP_SITE_ID,
+    process.env.APP_SITE_ID || 0,
     constant.ALL_NFT_MODE,
     wallet != 0 ? wallet : ethers.constants.AddressZero
   );
@@ -366,7 +366,7 @@ fundRaisin.getAllNFTs = async (type, sites) => {
 fundRaisin.getNFTByTokenId = async (tokenId) => {
   try {
     let nfts = await Contract.getCampaignNfts(
-      process.env.APP_SITE_ID,
+      process.env.APP_SITE_ID || 0,
       constant.ALL_NFT_MODE,
       ethers.constants.AddressZero
     );
@@ -413,7 +413,7 @@ fundRaisin.getSHA256Hash = async (tokenId) => {
 };
 
 fundRaisin.getSiteWiseMinted = async () => {
-  const minted = await Contract.campaignWiseMinted(process.env.APP_SITE_ID);
+  const minted = await Contract.campaignWiseMinted(process.env.APP_SITE_ID || 0);
   return minted.toNumber();
 };
 

@@ -11,10 +11,8 @@ import network from "./api/network.js";
 import bodyParser from "body-parser";
 import { getWebsiteConfig } from "./utils/services.js";
 import constant from "./utils/constant.js";
-// import path from "path";
-// import * as url from "url";
-
-// const __dirname = url.fileURLToPath(new URL("..", import.meta.url));
+import path from "path";
+import * as url from "url";
 
 const PORT = process.env.PORT || 8080;
 const app = express();
@@ -22,6 +20,10 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
+
+const __dirname = url.fileURLToPath(new URL("..", import.meta.url));
+const root = path.join(__dirname, "client", "build");
+app.use(express.static(root, { lastModified: false, etag: false }));
 
 app.get("/health", function (req, res) {
   res.send(process.env);
@@ -33,8 +35,13 @@ app.use("/artCreationPack", artAPI);
 app.use("/fundraisin", fundraisinAPI);
 app.use(shareAPI);
 app.use(arweaveAPI);
-app.get("/configuration", async (req, res) => {
-  const config = await getWebsiteConfig();
+app.get("/configuration/:id", async (req, res) => {
+  
+  const { id } = req.params;
+  const config = await getWebsiteConfig(id);
+  
+  process.env.APP_SITE_ID = config?.sc_id;
+  console.log(process.env.APP_SITE_ID)
   res.send({
     "PRIMARY": config?.web_main_color,
     "SECONDARY": config?.secondary_color,
@@ -87,7 +94,13 @@ app.get("/constants", async (req, res) => {
 });
 
 app.use("/", (req, res) => {
-  res.send("server is  running");
+  res.send("server is running");
+});
+
+
+/** All other routes redirected to front-end app */
+app.get("*", function (req, res) {
+  res.sendFile("index.html", { root, lastModified: false, etag: false });
 });
 
 app.listen(PORT, async () => {

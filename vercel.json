@@ -1,13 +1,9 @@
 {
   "version": 2,
-  "builds": [
-    { "src": "server/index.js", "use": "@vercel/node" }
-  ],
-  "routes": [
-    { "src": "/(.*)", "dest": "server/index.js" }
-  ],
+  "builds": [{ "src": "server/index.js", "use": "@vercel/node" }],
+  "routes": [{ "src": "/(.*)", "dest": "server/index.js" }],
   "env": {
-    "APP_SITE_ID": "5",
+    "APP_SITE_ID": "0",
     "CONTRACT_ADDRESS_ARTIST": "0x70aFCA14142272dEc97570dE18139Ad8fa34A7e7",
     "CONTRACT_ADDRESS_SITE": "0x079118268F9071A969ab893B8C1c9c9F3F215210",
     "CONTRACT_ADDRESS_RARITY": "0xfC6d519a6c653495fc11d71828723f0F2b30A809",

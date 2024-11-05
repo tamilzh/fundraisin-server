@@ -12,7 +12,7 @@ const Contract = new ethers.Contract(
 function site() {}
 
 site.getSite = async () => {
-  let site = await Contract.campaignList(process.env.APP_SITE_ID);
+  let site = await Contract.campaignList(process.env.APP_SITE_ID || 0);
   return {
     siteId: site.campaignId.toNumber(),
     siteName: site.campaignName,
@@ -39,7 +39,7 @@ site.getSite = async () => {
 };
 
 site.isApproved = async () => {
-  return await Contract.isCampaignApproved(process.env.APP_SITE_ID, 0);
+  return await Contract.isCampaignApproved(process.env.APP_SITE_ID || 0, 0);
 };
 
 site.getSiteByAddress = async (type, address) => {
@@ -48,7 +48,7 @@ site.getSiteByAddress = async (type, address) => {
 };
 
 site.getBgPriceBySite = async () => {
-  return await Contract.getBgPriceByCampaign(process.env.APP_SITE_ID, 0, 0);
+  return await Contract.getBgPriceByCampaign(process.env.APP_SITE_ID || 0, 0, 0);
 };
 
 site.getBeneficiary = async (address) => {
@@ -113,7 +113,7 @@ site.getSiteDistribution = async (siteDetails,artistDetails) => {
 
 site.getPresetDistribution = async () => {
   let presets = await Contract.getPresetDistributionByCampaignId(
-    process.env.APP_SITE_ID
+    process.env.APP_SITE_ID || 0
   );
   return presets
     .filter((item) => item.distroPresetId.toNumber() > 0)

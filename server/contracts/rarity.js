@@ -20,7 +20,7 @@ rarity.getABI = () => {
 
 rarity.getRarityList = async () => {
   let rarityList = await Contract.getRarityByCampaign(
-    process.env.APP_SITE_ID
+    process.env.APP_SITE_ID || 0
   );
   return rarityList
     .filter((rarity) => rarity.campaignId.toNumber() > 0)

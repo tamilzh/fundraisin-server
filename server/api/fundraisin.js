@@ -43,7 +43,7 @@ routes.get("/funds-raised/:type", async (req, res) => {
 
   const response = await fundRaisin.getAllNFTs(
     index.indexOf(req.params.type),
-    [process.env.APP_SITE_ID]
+    [process.env.APP_SITE_ID || 0]
   );
   res.send({ ...response, name });
 });

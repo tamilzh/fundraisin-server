@@ -35,7 +35,7 @@ artist.getArtistWallet = async (id) => {
 artist.getBackgroundColor = async (artCreationPackId, siteBgPrice) => {
   let artistBackgrounds = [];
   let artistBackground = await Contract.getBackgroundColor(
-    process.env.APP_SITE_ID,
+    process.env.APP_SITE_ID || 0,
     artCreationPackId,
     false
   );
@@ -60,7 +60,7 @@ artist.getBackgroundColor = async (artCreationPackId, siteBgPrice) => {
 
 artist.getPatterns = async (artCreationPackId) => {
   let patterns = await Contract.getPattern(
-    process.env.APP_SITE_ID,
+    process.env.APP_SITE_ID || 0,
     artCreationPackId,
     false
   );
@@ -78,7 +78,7 @@ artist.getPatterns = async (artCreationPackId) => {
 
 artist.getLayers = async (patternId) => {
   let layers = await Contract.getLayer(
-    process.env.APP_SITE_ID,
+    process.env.APP_SITE_ID || 0,
     patternId,
     false
   );
@@ -96,7 +96,7 @@ artist.getLayers = async (patternId) => {
 
 artist.getLayerChoices = async (layerId) => {
   let layerchoices = await Contract.getLayerChoice(
-    process.env.APP_SITE_ID,
+    process.env.APP_SITE_ID || 0,
     layerId,
     false
   );
@@ -115,7 +115,7 @@ artist.getLayerChoices = async (layerId) => {
 
 artist.getApprovedNames = async (artCreationPackId) => {
   let names = await Contract.getApprovedName(
-    process.env.APP_SITE_ID,
+    process.env.APP_SITE_ID || 0,
     artCreationPackId,
     false
   );
@@ -133,7 +133,7 @@ artist.getApprovedNames = async (artCreationPackId) => {
 
 const getFilterData = async (artCreationPackId) => {
   let backgroundColor = await Contract.getBackgroundColor(
-    process.env.APP_SITE_ID,
+    process.env.APP_SITE_ID || 0,
     artCreationPackId,
     true
   );
@@ -157,7 +157,7 @@ const getFilterData = async (artCreationPackId) => {
     });
 
   let pattern = await Contract.getPattern(
-    process.env.APP_SITE_ID,
+    process.env.APP_SITE_ID || 0,
     artCreationPackId,
     true
   );
