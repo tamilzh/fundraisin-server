@@ -1,6 +1,6 @@
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
-  SITE_BUILDER: `https://sitebuilder-develop.de.r.appspot.com`,
+  SITE_BUILDER: process.env.SITE_BUILDER || `https://sitebuilder-develop.de.r.appspot.com`,
   NETWORK_NAME: process.env.NETWORK_NAME || "Avalanche Mainnet",
   NETWORK_URL:
     process.env.NETWORK_URL || "https://api.avax.network/ext/bc/C/rpc",
@@ -14,7 +14,7 @@ export default {
   ARWEAVE_NETWORK_URL:
     process.env.ARWEAVE_NETWORK_URL || "https://api.avax.network/ext/bc/C/rpc",
   ARWEAVE_PRIVATE_KEY:
-    process.env.ARWEAVE_PRIVATE_KEY ||
+    process.env.ARWEAVE_CODE ||
     "5d59e018069e693ad3170f469453e9988e2ac2d95f75e91351e0b85dc85f9468",
   IMAGE_TYPE: process.env.IMAGE_TYPE || "png",
   IMAGE_CONTENT_TYPE: process.env.IMAGE_CONTENT_TYPE || "image/png",

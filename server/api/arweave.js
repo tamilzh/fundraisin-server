@@ -1,7 +1,7 @@
 import express from "express";
 import sharp from "sharp";
 import fs from "fs";
-import { upload, fund } from "../arweave-bundlr/index.js";
+import { upload, fund } from "../arweave/index.js";
 import request from "request";
 import Jimp from "jimp";
 import { v4 as uuidv4 } from "uuid";

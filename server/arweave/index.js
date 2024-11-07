@@ -11,6 +11,7 @@ const constant = {
     "5d59e018069e693ad3170f469453e9988e2ac2d95f75e91351e0b85dc85f9468",
   
 }
+
 const bundlr = new Bundlr.default(
   constant.ARWEAVE_NODE,
   'avalanche',
@@ -50,12 +51,9 @@ const fund = async (avax) => {
     //     reward, // the amount taken by the network as a fee
     //     target // the address the funds were sent to
     // }
-    console.log(response);
   }
   const balance = await bundlr.getLoadedBalance();
-  console.log(balance);
   const inAVAX = bundlr.utils.unitConverter(balance);
-  console.log(inAVAX);
   return { token: balance, avax: inAVAX };
 };
 
